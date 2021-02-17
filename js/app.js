@@ -12,8 +12,7 @@ $(document).ready(function () {
 
     let page1 = $('#page1')
     let page2 = $('#page2')
-    const page1Link = "data/page-1.json"
-    const page2Link = "data/page-2.json"
+
 
 
     // Load Json data
@@ -26,7 +25,6 @@ $(document).ready(function () {
                 new Gallary(item.image_url, item.title, item.description, item.keyword, item.horns)
             })
         }).done(() => {
-
             Gallary.prototype.renderer(imgGallary)
             Gallary.prototype.addFliters(keywords)
         })
@@ -60,7 +58,6 @@ $(document).ready(function () {
             main.append(mustache);
             if (keywords.includes(item.keyword) == false)
                 keywords.push(item.keyword)
-
         });
     }
 
@@ -93,53 +90,33 @@ $(document).ready(function () {
 
     Gallary.prototype.fiterAndSort = function () {
 
-
         main.empty();
-
         if (filter.val() == "default") {
-
             Gallary.prototype.renderer(imgGallary)
-
-
         } else {
             let renderAfterFilter = []
             imgGallary.forEach(item => {
                 if (filter.val() == item.keyword) {
                     renderAfterFilter.push(item)
-
                 }
             })
-
             Gallary.prototype.renderer(renderAfterFilter)
         }
     }
-    // Gallary value change listener
+
+    function pageLoader(page) {
+        main.empty()
+        filter.empty()
+        imgGallary = []
+        keywords = []
+        getPageDate(page.target.value)
+    }
 
 
+    getPageDate(page1.val())
 
+    page1.click(pageLoader)
+    page2.click(pageLoader)
     filter.on('change', Gallary.prototype.fiterAndSort)
     sortBy.on('change', Gallary.prototype.fiterAndSort)
-
-
-    getPageDate(page1Link)
-    page1.click(function () {
-        main.empty()
-        filter.empty()
-        imgGallary = []
-        keywords = []
-        getPageDate(page1Link)
-
-
-    })
-    page2.click(function () {
-        main.empty()
-        filter.empty()
-        imgGallary = []
-        keywords = []
-        getPageDate(page2Link)
-
-    })
-
-
-
 });

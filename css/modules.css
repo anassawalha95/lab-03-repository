@@ -20,27 +20,31 @@
     padding: 1em;
     border-radius: 0.5em;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    margin: 2em;
+    width: 18em;
+    transition: 0.5s;
 }
 
 .title {
-    width: 15em;
-    margin-bottom: 2em;
+    margin-bottom: 1.2em;
+    padding: 0.5em 0;
     font-weight: 900;
-    font-size: 1.5em;
+    font-size: 1.2em;
+    height: 2em;
 }
 
 .img {
-    width: 15em;
+    width: 100%;
     height: 15em;
 }
 
 .desc {
-    margin-top: 2em;
-    margin-bottom: 2em;
+    margin-top: 1.2em;
+    margin-bottom: 0.2em;
     font-weight: 400;
-    width: 22em;
+    max-width: 15em;
+    min-width: 5em;
     text-align: center;
+    height: auto;
 }
 
 #button {
@@ -59,7 +63,6 @@
     width: 45%;
     margin: 20px 0;
     border-radius: 5px;
-    transition: 0.3;
 }
 
 .pagination:hover {
@@ -71,4 +74,27 @@
     width: 100%;
     border-radius: 0.3em;
     height: 2.5em;
+}
+
+@media (min-width: 480px) and (max-width: 768px) {
+    main {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .photo-template {
+        background-color: #009205;
+        color: white;
+        transition: 0.5s;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 960px) {
+    main {
+        grid-template-columns: repeat(3, 1fr);
+        transition: 0.5s;
+    }
+    .photo-template {
+        background-color: #003f92;
+        color: white;
+        transition: 0.5s;
+    }
 }
