@@ -29,10 +29,7 @@ $(document).ready(function () {
 
             Gallary.prototype.renderer(imgGallary)
             Gallary.prototype.addFliters(keywords)
-
         })
-
-
     }
 
     // Gallary constructor
@@ -43,7 +40,6 @@ $(document).ready(function () {
         this.keyword = keyword;
         this.horns = horns;
         imgGallary.push(this)
-
     }
 
     // Gallary items renderer
@@ -51,11 +47,11 @@ $(document).ready(function () {
         let itemsHolder = imgGallary;
 
         if (renderAfterFilter != "null" || renderAfterFilter != "undefined") {
-            Gallary.prototype.filterSort(renderAfterFilter)
             itemsHolder = renderAfterFilter
+            Gallary.prototype.sorter(renderAfterFilter)
         }
         else {
-            Gallary.prototype.filterSort(itemsHolder)
+            Gallary.prototype.sorter(itemsHolder)
         }
 
         itemsHolder.forEach(item => {
@@ -66,9 +62,6 @@ $(document).ready(function () {
                 keywords.push(item.keyword)
 
         });
-
-        console.log(itemsHolder)
-
     }
 
     // Gallary fillters
@@ -80,7 +73,7 @@ $(document).ready(function () {
     }
 
     // Gallary sort
-    Gallary.prototype.filterSort = function (sorter) {
+    Gallary.prototype.sorter = function (sorter) {
         console.log(sortBy.val())
         if (sortBy.val() == "title")
             sorter.sort(function (a, b) {
@@ -98,9 +91,8 @@ $(document).ready(function () {
         }
     }
 
+    Gallary.prototype.fiterAndSort = function () {
 
-    // Gallary value change listener
-    filter.change(() => {
 
         main.empty();
 
@@ -120,33 +112,13 @@ $(document).ready(function () {
 
             Gallary.prototype.renderer(renderAfterFilter)
         }
-
-
-    })
-
-    sortBy.change(() => {
-
-        main.empty();
-
-        if (filter.val() == "default") {
-
-            Gallary.prototype.renderer(imgGallary)
-
-
-        } else {
-            let renderAfterFilter = []
-            imgGallary.forEach(item => {
-                if (filter.val() == item.keyword) {
-                    renderAfterFilter.push(item)
-
-                }
-            })
-
-            Gallary.prototype.renderer(renderAfterFilter)
-        }
-
     }
-    )
+    // Gallary value change listener
+
+
+
+    filter.on('change', Gallary.prototype.fiterAndSort)
+    sortBy.on('change', Gallary.prototype.fiterAndSort)
 
 
     getPageDate(page1Link)
